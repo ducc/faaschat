@@ -34,7 +34,8 @@ func Handle(req []byte) (string, error) {
 	}
 
 	loginResponse := &LoginResponse{
-		Token: token,
+		Token:  token,
+		UserId: userID,
 	}
 
 	res, err := (&jsonpb.Marshaler{}).MarshalToString(loginResponse)

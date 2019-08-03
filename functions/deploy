@@ -1,0 +1,3 @@
+#!/bin/bash
+faas-cli build --build-arg GO111MODULE=on -f $1.yml && faas-cli push -f $1.yml && faas-cli deploy -f $1.yml -g http://127.0.0.1:31112
+

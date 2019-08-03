@@ -29,7 +29,7 @@ func (m *LoginRequest) Reset()         { *m = LoginRequest{} }
 func (m *LoginRequest) String() string { return proto.CompactTextString(m) }
 func (*LoginRequest) ProtoMessage()    {}
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{0}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{0}
 }
 func (m *LoginRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LoginRequest.Unmarshal(m, b)
@@ -58,6 +58,7 @@ func (m *LoginRequest) GetUserName() string {
 
 type LoginResponse struct {
 	Token                string   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	UserId               string   `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -67,7 +68,7 @@ func (m *LoginResponse) Reset()         { *m = LoginResponse{} }
 func (m *LoginResponse) String() string { return proto.CompactTextString(m) }
 func (*LoginResponse) ProtoMessage()    {}
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{1}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{1}
 }
 func (m *LoginResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_LoginResponse.Unmarshal(m, b)
@@ -94,6 +95,13 @@ func (m *LoginResponse) GetToken() string {
 	return ""
 }
 
+func (m *LoginResponse) GetUserId() string {
+	if m != nil {
+		return m.UserId
+	}
+	return ""
+}
+
 type RegisterRequest struct {
 	UserName             string   `protobuf:"bytes,1,opt,name=user_name,json=userName,proto3" json:"user_name,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -105,7 +113,7 @@ func (m *RegisterRequest) Reset()         { *m = RegisterRequest{} }
 func (m *RegisterRequest) String() string { return proto.CompactTextString(m) }
 func (*RegisterRequest) ProtoMessage()    {}
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{2}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{2}
 }
 func (m *RegisterRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RegisterRequest.Unmarshal(m, b)
@@ -142,7 +150,7 @@ func (m *RegisterResponse) Reset()         { *m = RegisterResponse{} }
 func (m *RegisterResponse) String() string { return proto.CompactTextString(m) }
 func (*RegisterResponse) ProtoMessage()    {}
 func (*RegisterResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{3}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{3}
 }
 func (m *RegisterResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_RegisterResponse.Unmarshal(m, b)
@@ -164,6 +172,7 @@ var xxx_messageInfo_RegisterResponse proto.InternalMessageInfo
 
 type IsAuthenticatedRequest struct {
 	Token                string   `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	UserId               string   `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -173,7 +182,7 @@ func (m *IsAuthenticatedRequest) Reset()         { *m = IsAuthenticatedRequest{}
 func (m *IsAuthenticatedRequest) String() string { return proto.CompactTextString(m) }
 func (*IsAuthenticatedRequest) ProtoMessage()    {}
 func (*IsAuthenticatedRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{4}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{4}
 }
 func (m *IsAuthenticatedRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IsAuthenticatedRequest.Unmarshal(m, b)
@@ -200,6 +209,13 @@ func (m *IsAuthenticatedRequest) GetToken() string {
 	return ""
 }
 
+func (m *IsAuthenticatedRequest) GetUserId() string {
+	if m != nil {
+		return m.UserId
+	}
+	return ""
+}
+
 type IsAuthenticatedResponse struct {
 	Authenticated        bool     `protobuf:"varint,1,opt,name=authenticated,proto3" json:"authenticated,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -211,7 +227,7 @@ func (m *IsAuthenticatedResponse) Reset()         { *m = IsAuthenticatedResponse
 func (m *IsAuthenticatedResponse) String() string { return proto.CompactTextString(m) }
 func (*IsAuthenticatedResponse) ProtoMessage()    {}
 func (*IsAuthenticatedResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_exchange_f2c071013abd0e32, []int{5}
+	return fileDescriptor_exchange_a159d36ef6342b32, []int{5}
 }
 func (m *IsAuthenticatedResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_IsAuthenticatedResponse.Unmarshal(m, b)
@@ -247,20 +263,21 @@ func init() {
 	proto.RegisterType((*IsAuthenticatedResponse)(nil), "protos.IsAuthenticatedResponse")
 }
 
-func init() { proto.RegisterFile("exchange.proto", fileDescriptor_exchange_f2c071013abd0e32) }
+func init() { proto.RegisterFile("exchange.proto", fileDescriptor_exchange_a159d36ef6342b32) }
 
-var fileDescriptor_exchange_f2c071013abd0e32 = []byte{
-	// 181 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_exchange_a159d36ef6342b32 = []byte{
+	// 198 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4b, 0xad, 0x48, 0xce,
 	0x48, 0xcc, 0x4b, 0x4f, 0xd5, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x62, 0x03, 0x53, 0xc5, 0x4a,
 	0xda, 0x5c, 0x3c, 0x3e, 0xf9, 0xe9, 0x99, 0x79, 0x41, 0xa9, 0x85, 0xa5, 0xa9, 0xc5, 0x25, 0x42,
 	0xd2, 0x5c, 0x9c, 0xa5, 0xc5, 0xa9, 0x45, 0xf1, 0x79, 0x89, 0xb9, 0xa9, 0x12, 0x8c, 0x0a, 0x8c,
-	0x1a, 0x9c, 0x41, 0x1c, 0x20, 0x01, 0xbf, 0xc4, 0xdc, 0x54, 0x25, 0x55, 0x2e, 0x5e, 0xa8, 0xe2,
+	0x1a, 0x9c, 0x41, 0x1c, 0x20, 0x01, 0xbf, 0xc4, 0xdc, 0x54, 0x25, 0x3b, 0x2e, 0x5e, 0xa8, 0xe2,
 	0xe2, 0x82, 0xfc, 0xbc, 0xe2, 0x54, 0x21, 0x11, 0x2e, 0xd6, 0x92, 0xfc, 0xec, 0xd4, 0x3c, 0xa8,
-	0x4a, 0x08, 0x47, 0x49, 0x8f, 0x8b, 0x3f, 0x28, 0x35, 0x3d, 0xb3, 0xb8, 0x24, 0xb5, 0x88, 0x28,
-	0x63, 0x85, 0xb8, 0x04, 0x10, 0xea, 0x21, 0x26, 0x2b, 0xe9, 0x71, 0x89, 0x79, 0x16, 0x3b, 0x96,
-	0x96, 0x64, 0xa4, 0xe6, 0x95, 0x64, 0x26, 0x27, 0x96, 0xa4, 0xa6, 0xc0, 0x8c, 0xc2, 0x6e, 0xa7,
-	0x3d, 0x97, 0x38, 0x86, 0x7a, 0xa8, 0x23, 0x55, 0xb8, 0x78, 0x13, 0x91, 0x25, 0xc0, 0x1a, 0x39,
-	0x82, 0x50, 0x05, 0x93, 0x20, 0x01, 0x62, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0xb8, 0xf1, 0x93,
-	0xf3, 0x29, 0x01, 0x00, 0x00,
+	0x4a, 0x08, 0x47, 0x48, 0x9c, 0x8b, 0x1d, 0x6c, 0x46, 0x66, 0x8a, 0x04, 0x13, 0x58, 0x9c, 0x0d,
+	0xc4, 0xf5, 0x4c, 0x51, 0xd2, 0xe3, 0xe2, 0x0f, 0x4a, 0x4d, 0xcf, 0x2c, 0x2e, 0x49, 0x2d, 0x22,
+	0xca, 0x3e, 0x21, 0x2e, 0x01, 0x84, 0x7a, 0x88, 0x95, 0x4a, 0xee, 0x5c, 0x62, 0x9e, 0xc5, 0x8e,
+	0xa5, 0x25, 0x19, 0xa9, 0x79, 0x25, 0x99, 0xc9, 0x89, 0x25, 0xa9, 0x29, 0x30, 0xa3, 0x48, 0x74,
+	0x8c, 0x3d, 0x97, 0x38, 0x86, 0x41, 0x50, 0x6f, 0xa9, 0x70, 0xf1, 0x26, 0x22, 0x4b, 0x80, 0x4d,
+	0xe4, 0x08, 0x42, 0x15, 0x4c, 0x82, 0x04, 0xa1, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xb1, 0xbe,
+	0x00, 0xc1, 0x5b, 0x01, 0x00, 0x00,
 }

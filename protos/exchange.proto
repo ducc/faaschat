@@ -8,6 +8,7 @@ message LoginRequest {
 
 message LoginResponse {
     string token = 1;
+    string user_id = 2;
 }
 
 message RegisterRequest {
@@ -19,6 +20,7 @@ message RegisterResponse {
 
 message IsAuthenticatedRequest {
     string token = 1;
+    string user_id = 2;
 }
 
 message IsAuthenticatedResponse {
