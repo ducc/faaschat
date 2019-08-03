@@ -1,0 +1,26 @@
+CREATE TABLE users (
+    user_id UUID NOT NULL DEFAULT gen_random_uuid(),
+    user_name STRING NOT NULL,
+    PRIMARY KEY (user_id, user_name)
+);
+
+CREATE TABLE user_tokens (
+    user_id UUID NOT NULL,
+    token STRING NOT NULL,
+    time_created TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (user_id)
+);
+
+CREATE TABLE conversations (
+    conversation_id UUID NOT NULL DEFAULT gen_random_uuid(),
+    conversation_name STRING NOT NULL,
+    PRIMARY KEY (conversation_id)
+);
+
+CREATE TABLE messages (
+    timestamp TIMESTAMP NOT NULL DEFAULT current_timestamp(), 
+    user_id UUID NOT NULL,
+    conversation_id UUID NOT NULL,
+    content STRING NOT NULL,
+    PRIMARY KEY (timestamp, user_id, conversation_id)
+);

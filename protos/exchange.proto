@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package protos;
+
+message LoginRequest {
+    string user_name = 1;
+}
+
+message LoginResponse {
+    string token = 1;
+}
+
+message RegisterRequest {
+    string user_name = 1;
+}
+
+message RegisterResponse {
+}
+
+message IsAuthenticatedRequest {
+    string token = 1;
+}
+
+message IsAuthenticatedResponse {
+    bool authenticated = 1;
+}
