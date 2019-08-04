@@ -26,3 +26,22 @@ message IsAuthenticatedRequest {
 message IsAuthenticatedResponse {
     bool authenticated = 1;
 }
+
+message CreateConversationRequest {
+    string user_id = 1;
+    string token = 2;
+    string conversation_name = 3;
+}
+
+message CreateConversationResponse {
+    string conversation_id = 1;
+}
+
+message JoinConversationRequest {
+    string user_id = 1;
+    string token = 2;
+    string conversation_id = 3;
+}
+
+message JoinConversationResponse {
+}

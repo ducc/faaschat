@@ -1,0 +1,62 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  login:
+    lang: go-faaschat
+    handler: ./login
+    image: joeburnardredbrain/faaschat:login-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+  register:
+    lang: go-faaschat
+    handler: ./register
+    image: joeburnardredbrain/faaschat:register-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+  isauthenticated:
+    lang: go-faaschat
+    handler: ./isauthenticated
+    image: joeburnardredbrain/faaschat:isauthenticated-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+  createconversation:
+    lang: go-faaschat
+    handler: ./createconversation
+    image: joeburnardredbrain/faaschat:createconversation-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+      ENDPOINT_ISAUTHENTICATED: http://gateway.openfaas:8080/function/isauthenticated
+  joinconversation:
+    lang: go-faaschat
+    handler: ./joinconversation
+    image: joeburnardredbrain/faaschat:joinconversation-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+      ENDPOINT_ISAUTHENTICATED: http://gateway.openfaas:8080/function/isauthenticated
