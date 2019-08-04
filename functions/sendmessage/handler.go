@@ -69,7 +69,7 @@ func sendMessage(ctx context.Context, userID, conversationID, content string) er
 		return err
 	}
 
-	if _, err := stmt.ExecContext(ctx, conversationID, userID, content); err != nil {
+	if _, err := stmt.ExecContext(ctx, userID, conversationID, content); err != nil {
 		return err
 	}
 
