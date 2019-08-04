@@ -9,24 +9,24 @@ import (
 
 // Handle a serverless request
 func Handle(req []byte) (string, error) {
-	createRequest := &CreateConversationRequest{}
-	if err := jsonpb.Unmarshal(bytes.NewReader(req), createRequest); err != nil {
+	joinRequest := &JoinConversationRequest{}
+	if err := jsonpb.Unmarshal(bytes.NewReader(req), joinRequest); err != nil {
 		return "", err
 	}
 
-	if createRequest.UserId == "" {
+	if joinRequest.UserId == "" {
 		return "", errors.New("user id is empty")
 	}
 
-	if createRequest.Token == "" {
+	if joinRequest.Token == "" {
 		return "", errors.New("token is empty")
 	}
 
-	if createRequest.ConversationName == "" {
-		return "", errors.New("conversation name is empty")
+	if joinRequest.ConversationId == "" {
+		return "", errors.New("conversation id is empty")
 	}
 
-	if authenticated, err := isAuthenticated(createRequest.UserId, createRequest.Token); err != nil {
+	if authenticated, err := isAuthenticated(joinRequest.UserId, joinRequest.Token); err != nil {
 		return "", err
 	} else if !authenticated {
 		return "", errors.New("not authenticated")
@@ -34,16 +34,13 @@ func Handle(req []byte) (string, error) {
 
 	ctx := context.Background()
 
-	conversationID, err := createConversation(ctx, createRequest.ConversationName)
-	if err != nil {
+	if err := joinConversation(ctx, joinRequest.UserId, joinRequest.ConversationId); err != nil {
 		return "", err
 	}
 
-	createResponse := &CreateConversationResponse{
-		ConversationId: conversationID,
-	}
+	joinResponse := &JoinConversationResponse{}
 
-	res, err := (&jsonpb.Marshaler{}).MarshalToString(createResponse)
+	res, err := (&jsonpb.Marshaler{}).MarshalToString(joinResponse)
 	if err != nil {
 		return "", err
 	}
@@ -51,23 +48,20 @@ func Handle(req []byte) (string, error) {
 	return res, nil
 }
 
-func createConversation(ctx context.Context, name string) (string, error) {
+func joinConversation(ctx context.Context, userID, conversationID string) error {
 	db, err := getDB()
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	stmt, err := db.PrepareContext(ctx, `insert into conversations (conversation_name) values ($1) returning conversation_id`)
+	stmt, err := db.PrepareContext(ctx, `insert into conversation_users (conversation_id, user_id) values ($1, $2)`)
 	if err != nil {
-		return "", err
+		return err
 	}
 
-	row := stmt.QueryRow(name)
-
-	var conversationID string
-	if err := row.Scan(&conversationID); err != nil {
-		return "", err
+	if _, err := stmt.ExecContext(ctx, conversationID, userID); err != nil {
+		return err
 	}
 
-	return conversationID, nil
+	return nil
 }
