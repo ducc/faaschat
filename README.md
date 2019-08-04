@@ -12,6 +12,13 @@ A distributed chat server build entirely using OpenFaaS functions, CockroachDB a
 - authentication
 - nice client
 
+### Possible improvements
+- reduce code duplication with better function templates
+- write code in other languages too instead of all in golang
+- better error handling, atm it sends the output of log.Print back to the caller
+- prometheus metrics
+- openfaas config for auto scaling strategies e.g. scaling down to 0 and scaling based on response time
+
 ## Architecture
 - every action a client needs is a OpenFaaS function with it's own endpoint
 - functions do not carry any state
