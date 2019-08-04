@@ -46,6 +46,16 @@ message JoinConversationRequest {
 message JoinConversationResponse {
 }
 
+message IsConversationMemberRequest {
+    string user_id = 1;
+    string token = 2;
+    string conversation_id = 3;
+}
+
+message IsConversationMemberResponse {
+    bool member = 1;
+}
+
 message SendMessageRequest {
     string user_id = 1;
     string token = 2;
@@ -54,4 +64,24 @@ message SendMessageRequest {
 }
 
 message SendMessageResponse {
+}
+
+message ReadMessagesRequest {
+    string user_id = 1;
+    string token = 2;
+    string conversation_id = 3;
+    // RFC3339 UTC
+    string from_timestamp = 4;
+    string to_timestamp = 5;
+}
+
+message ReadMessagesResponse {
+    message Message {
+        // RFC3339 UTC
+        string timestamp = 1;
+        string user_id = 2;
+        string content = 3;
+    }
+
+    repeated Message messages = 1;
 }

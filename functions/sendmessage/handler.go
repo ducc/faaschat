@@ -36,6 +36,12 @@ func Handle(req []byte) (string, error) {
 		return "", errors.New("not authenticated")
 	}
 
+	if member, err := isConversationMember(sendRequest.UserId, sendRequest.Token, sendRequest.ConversationId); err != nil {
+		return "", err
+	} else if !member {
+		return "", errors.New("not a member of the conversation")
+	}
+
 	ctx := context.Background()
 
 	if err := sendMessage(ctx, sendRequest.UserId, sendRequest.ConversationId, sendRequest.Content); err != nil {
