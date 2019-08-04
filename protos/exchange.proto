@@ -45,3 +45,13 @@ message JoinConversationRequest {
 
 message JoinConversationResponse {
 }
+
+message SendMessageRequest {
+    string user_id = 1;
+    string token = 2;
+    string conversation_id = 3;
+    string content = 4;
+}
+
+message SendMessageResponse {
+}
