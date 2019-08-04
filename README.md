@@ -25,6 +25,11 @@ A distributed chat server build entirely using OpenFaaS functions, CockroachDB a
 - functions communicate with each other via the internal gateway e.g. to check authentication
 - cockroachdb is the only source of truth
 
+## Screenshots
+OpenFaaS portal
+
+![](https://i.imgur.com/PLLnpZ6.png)
+
 ## Build & deploy the server
 1. clone
 1. install openfaas with helm (insecure mode)
