@@ -85,3 +85,17 @@ message ReadMessagesResponse {
 
     repeated Message messages = 1;
 }
+
+message GetConversationsRequest {
+    string user_id = 1;
+    string token = 2;
+}
+
+message GetConversationsResponse {
+    message Conversation {
+        string conversation_id = 1;
+        string conversation_name = 2;
+    }
+
+    repeated Conversation somethings = 1;
+}

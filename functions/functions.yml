@@ -98,4 +98,19 @@ functions:
       DB_SSLMODE: disable
       ENDPOINT_ISAUTHENTICATED: http://gateway.openfaas:8080/function/isauthenticated
       ENDPOINT_ISCONVERSATIONMEMBER: http://gateway.openfaas:8080/function/isconversationmember
-      # todo call isconversationmember in send and read messages to check that a user is permitted to view these
+  getconversations:
+    lang: go-faaschat
+    handler: ./getconversations
+    image: joeburnardredbrain/faaschat:getconversations-v0.1.0
+    environment:
+      DB_HOST: my-release-cockroachdb-public.default.svc.cluster.local
+      DB_PORT: 26257
+      DB_USER: faaschat
+      DB_PASS:
+      DB_NAME: faaschat
+      DB_SSLMODE: disable
+      ENDPOINT_ISAUTHENTICATED: http://gateway.openfaas:8080/function/isauthenticated
+  improved:
+    lang: go-faaschat-improved
+    handler: ./improved
+    image: joeburnardredbrain/faaschat:improved-v0.1.0
